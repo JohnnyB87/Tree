@@ -3,9 +3,9 @@
 //package com.deitel.ch22;
 
 // class Tree definition
-public class Tree< T extends Comparable< T >,K extends Comparable< K >,V extends Comparable< V > >
+public class Tree<K extends Comparable< K >,V extends Comparable< V > >
 {
-   private TreeNode< T, K, V > root;
+   private TreeNode< K, V > root;
 
    // constructor initializes an empty Tree of integers
    public Tree() 
@@ -14,12 +14,12 @@ public class Tree< T extends Comparable< T >,K extends Comparable< K >,V extends
    } // end Tree no-argument constructor
 
    // insert a new node in the binary search tree
-   public void insertNode( T insertValue, K key, V value )
+   public void insertNode( K key, V value )
    {
       if ( root == null )
-         root = new TreeNode< T, K, V >( insertValue, key, value ); // create root node
+         root = new TreeNode< K, V >( key, value ); // create root node
       else
-         root.insert( insertValue, key, value ); // call the insert method
+         root.insert( key, value ); // call the insert method
    } // end method insertNode
 
    // begin preorder traversal
@@ -29,32 +29,49 @@ public class Tree< T extends Comparable< T >,K extends Comparable< K >,V extends
    } // end method preorderTraversal
 
    // recursive method to perform preorder traversal
-   private void preorderHelper( TreeNode< T, K, V > node )
+   private void preorderHelper( TreeNode< K, V > node )
    {
       if ( node == null )
          return;
 
-      System.out.printf( "data: %s  --  key: %s  --  value: %s%n", node.data, node.key, node.value ); // output node data
+      System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
       preorderHelper( node.leftNode ); // traverse left subtree
       preorderHelper( node.rightNode ); // traverse right subtree
    } // end method preorderHelper
 
    // begin inorder traversal
-   public void inorderTraversal()
-   { 
-      inorderHelper( root ); 
+   public void descendingOrderTraversal()
+   {
+       descendingOrderHelper( root );
    } // end method inorderTraversal
 
    // recursive method to perform inorder traversal
-   private void inorderHelper( TreeNode< T, K, V > node )
+   private void descendingOrderHelper( TreeNode< K, V > node )
    {
       if ( node == null )
          return;
 
-      inorderHelper( node.leftNode ); // traverse left subtree
-      System.out.printf( "%s ", node.data ); // output node data
-      inorderHelper( node.rightNode ); // traverse right subtree
+       descendingOrderHelper( node.leftNode ); // traverse left subtree
+       System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
+       descendingOrderHelper( node.rightNode ); // traverse right subtree
    } // end method inorderHelper
+
+    public void ascendingOrderTraversal()
+    {
+        ascendingOrderHelper( root );
+    } // end method inorderTraversal
+
+    // recursive method to perform inorder traversal
+    private void ascendingOrderHelper( TreeNode< K, V > node )
+    {
+        if ( node == null )
+            return;
+
+        ascendingOrderHelper( node.rightNode ); // traverse left subtree
+        System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
+        ascendingOrderHelper( node.leftNode ); // traverse right subtree
+
+    } // end method inorderHelper
 
    // begin postorder traversal
    public void postorderTraversal()
@@ -63,15 +80,31 @@ public class Tree< T extends Comparable< T >,K extends Comparable< K >,V extends
    } // end method postorderTraversal
 
    // recursive method to perform postorder traversal
-   private void postorderHelper( TreeNode< T, K, V > node )
+   private void postorderHelper( TreeNode< K, V > node )
    {
       if ( node == null )
          return;
   
       postorderHelper( node.leftNode ); // traverse left subtree
       postorderHelper( node.rightNode ); // traverse right subtree
-      System.out.printf( "%s ", node.data ); // output node data
+      System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
    } // end method postorderHelper
+
+    public V findByKey(K key){
+       return findByKeyHelper(root, key,1);
+    }
+
+    private V findByKeyHelper(TreeNode<K, V> node, K key,int count) {
+       System.out.printf("%d,",count);
+       if(node == null)
+           return null;
+       else if(key.compareTo( node.key) == 0)
+           return node.value;
+       else if(key.compareTo( node.key) < 0)
+           return findByKeyHelper(node.leftNode, key, count+1);
+       else
+           return findByKeyHelper(node.rightNode, key, count+1);
+    }
 } // end class Tree
 
 /**************************************************************************

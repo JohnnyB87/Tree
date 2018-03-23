@@ -1,46 +1,47 @@
 //TreeNode class declarations for a binary search tree.
 
 // class TreeNode definition
-class TreeNode<  T extends Comparable< T>,K extends Comparable< K >,V extends Comparable< V >>
+class TreeNode< K extends Comparable< K >,V extends Comparable< V >>
 {
     // package access members
-    TreeNode< T, K, V > leftNode; // left node
-    T data; // node value
-    K key;
-    V value;
-    TreeNode< T, K, V > rightNode; // right node
+    TreeNode< K, V > leftNode; // left node
+    K key; // node key
+    V value; // node data
+    TreeNode< K, V > rightNode; // right node
 
     // constructor initializes data and makes this a leaf node
-    public TreeNode( T nodeData, K key, V value )
+    public TreeNode( K key, V value )
     {
-        this.data = nodeData;
         this.key = key;
         this.value = value;
         leftNode = rightNode = null; // node has no children
     } // end TreeNode constructor
 
     // locate insertion point and insert new node; ignore duplicate values
-    public void insert( T insertValue, K key, V value )
+    public void insert( K key, V value )
     {
-        System.out.println("\n----------------\n"+insertValue.getClass()+"\n----------------------");
+        int compareValue = key.compareTo( this.key );
         // insert in left subtree
-        if ( insertValue.compareTo( data ) < 0 )
+        if ( compareValue < 0 )
         {
             // insert new
             if ( leftNode == null )
-                leftNode = new TreeNode< T, K, V >( insertValue, key, value );
+                leftNode = new TreeNode< K, V >( key, value );
             else // continue traversing left subtree recursively
-                leftNode.insert( insertValue, key, value );
+                leftNode.insert( key, value );
         } // end if
         // insert in right subtree
-        else if ( insertValue.compareTo( data ) > 0 )
+        else if ( compareValue > 0 )
         {
             // insert new TreeNode
             if ( rightNode == null )
-                rightNode = new TreeNode< T, K, V >( insertValue, key, value);
+                rightNode = new TreeNode< K, V >( key, value);
             else // continue traversing right subtree recursively
-                rightNode.insert( insertValue, key, value);
-        } // end else if
+                rightNode.insert( key, value);
+        }
+        else{
+            System.out.printf("Duplicate key found: %s%n",key);
+        }// end else if
     } // end method insert
 } // end class TreeNode
 

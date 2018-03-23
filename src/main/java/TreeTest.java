@@ -1,13 +1,19 @@
 // Fig. 22.18: TreeTest.java
 // Binary tree test program.
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
+import java.io.BufferedReader;
 //import com.deitel.ch22.Tree;
 
 public class TreeTest 
 {
    public static void main( String[] args )
    {
-      Tree< Integer, String, String > tree = new Tree();
+      Tree< String, String > tree = new Tree();
+      Tree<Integer, String> tree1 = new Tree();
       int data;
       String key;
       String value;
@@ -15,25 +21,62 @@ public class TreeTest
 
       System.out.println( "Inserting the following values: " );
 
-      // insert 10 random integers from 0-99 in tree 
-      for ( int i = 1; i <= 10; i++ ) 
+      // insert 10 random integers from 0-99 in tree
+      for ( int i = 1; i <= 10; i++ )
       {
          data = randomNumber.nextInt( 100 );
-         key = "testKey" + i;
+         //key = "testKey" + i;
          value = "testValue" + i;
          //System.out.printf( "%d ", data );
-         tree.insertNode( data, key, value );
+         tree1.insertNode( data, value );
+         System.out.print(data + ",");
       } // end for
+       System.out.println("");
+
+      try {
+         File file = new File("Prizes.txt");
+         FileReader fr = new FileReader(file);
+         BufferedReader br = new BufferedReader(fr);
+         String newLine = br.readLine();
+
+         while(newLine != null){
+            String[] newLineSplit = newLine.split(",");
+            int starValue = Integer.parseInt(newLineSplit[0]);
+            key = newLineSplit[1];
+            value = newLineSplit[2];
+            tree.insertNode(key,value);
+            newLine = br.readLine();
+         }
+
+      }catch(IOException ioe){
+         System.out.println("-----Fail-----");
+      }
+
+       System.out.println ( "\n\nInorder traversal" );
+       tree1.descendingOrderTraversal(); // perform inorder traversal of tree
 
       System.out.println ( "\n\nPreorder traversal" );
       tree.preorderTraversal(); // perform preorder traversal of tree
 
       System.out.println ( "\n\nInorder traversal" );
-      tree.inorderTraversal(); // perform inorder traversal of tree
+      tree.descendingOrderTraversal(); // perform inorder traversal of tree
 
       System.out.println ( "\n\nPostorder traversal" );
       tree.postorderTraversal(); // perform postorder traversal of tree
       System.out.println();
+
+      System.out.println(tree.findByKey("alpha"));
+      System.out.println(tree.findByKey("charlie"));
+      System.out.println(tree.findByKey("golf"));
+      System.out.println(tree.findByKey("juliet"));
+      System.out.println(tree.findByKey("ALPHA"));
+      System.out.println(tree.findByKey("not real"));
+
+       System.out.println ( "\n\nInorder traversal" );
+       tree.ascendingOrderTraversal(); // perform inorder traversal of tree
+
+       System.out.println ( "\n\nInorder traversal" );
+       tree1.ascendingOrderTraversal(); // perform inorder traversal of tree
    } // end main
 } // end class TreeTest
 
