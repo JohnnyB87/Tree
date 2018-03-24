@@ -40,36 +40,36 @@ public class Tree<K extends Comparable< K >,V extends Comparable< V > >
    } // end method preorderHelper
 
    // begin inorder traversal
-   public void descendingOrderTraversal()
+   public void ascendingOrderTraversal()
    {
-       descendingOrderHelper( root );
+       ascendingOrderHelper( root );
    } // end method inorderTraversal
 
    // recursive method to perform inorder traversal
-   private void descendingOrderHelper( TreeNode< K, V > node )
+   private void ascendingOrderHelper( TreeNode< K, V > node )
    {
       if ( node == null )
          return;
 
-       descendingOrderHelper( node.leftNode ); // traverse left subtree
+       ascendingOrderHelper( node.leftNode ); // traverse left subtree
        System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
-       descendingOrderHelper( node.rightNode ); // traverse right subtree
+       ascendingOrderHelper( node.rightNode ); // traverse right subtree
    } // end method inorderHelper
 
-    public void ascendingOrderTraversal()
+    public void descendingOrderTraversal()
     {
-        ascendingOrderHelper( root );
+        descendingOrderHelper( root );
     } // end method inorderTraversal
 
     // recursive method to perform inorder traversal
-    private void ascendingOrderHelper( TreeNode< K, V > node )
+    private void descendingOrderHelper( TreeNode< K, V > node )
     {
         if ( node == null )
             return;
 
-        ascendingOrderHelper( node.rightNode ); // traverse left subtree
+        descendingOrderHelper( node.rightNode ); // traverse left subtree
         System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
-        ascendingOrderHelper( node.leftNode ); // traverse right subtree
+        descendingOrderHelper( node.leftNode ); // traverse right subtree
 
     } // end method inorderHelper
 
