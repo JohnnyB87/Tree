@@ -1,4 +1,4 @@
-//TreeNode class declarations for a binary search tree.
+package treePackage;
 
 // class TreeNode definition
 class TreeNode< K extends Comparable< K >,V extends Comparable< V >>

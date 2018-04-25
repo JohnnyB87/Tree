@@ -1,11 +1,9 @@
-// Fig. 22.18: TreeTest.java
-// Binary tree test program.
+package treePackage;// Binary tree test program.
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
-import java.io.BufferedReader;
 //import com.deitel.ch22.Tree;
 
 public class TreeTest 
@@ -65,6 +63,7 @@ public class TreeTest
       tree.postorderTraversal(); // perform postorder traversal of tree
       System.out.println();
 
+      System.out.println("FIND BY KEY");
       System.out.println(tree.findByKey("alpha"));
       System.out.println(tree.findByKey("charlie"));
       System.out.println(tree.findByKey("golf"));

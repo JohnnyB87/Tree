@@ -1,5 +1,4 @@
-// Fig. 22.17: Tree.java
-// TreeNode and Tree class declarations for a binary search tree.
+package treePackage;// TreeNode and Tree class declarations for a binary search tree.
 //package com.deitel.ch22;
 
 // class Tree definition
@@ -90,7 +89,7 @@ public class Tree<K extends Comparable< K >,V extends Comparable< V > >
       System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
    } // end method postorderHelper
 
-    public V findByKey(K key){
+    public V  findByKey(K key){
        return findByKeyHelper(root, key,1);
     }
 
