@@ -10,8 +10,8 @@ public class TreeTest
 {
    public static void main( String[] args )
    {
-      Tree< String, String > tree = new Tree();
-      Tree<Integer, String> tree1 = new Tree();
+      Tree< String, String > tree = new Tree< String, String >();
+      Tree<Integer, String> tree1 = new Tree<Integer, String>();
       int data;
       String key;
       String value;

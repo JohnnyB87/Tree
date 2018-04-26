@@ -1,11 +1,13 @@
 package treePackage;// TreeNode and Tree class declarations for a binary search tree.
 //package com.deitel.ch22;
 
+import java.util.ArrayList;
+
 // class Tree definition
 public class Tree<K extends Comparable< K >,V extends Comparable< V > >
 {
    private TreeNode< K, V > root;
-
+   private ArrayList<K> jUnitTestArray;
    // constructor initializes an empty Tree of integers
    public Tree() 
    { 
@@ -23,8 +25,10 @@ public class Tree<K extends Comparable< K >,V extends Comparable< V > >
 
    // begin preorder traversal
    public void preorderTraversal()
-   { 
-      preorderHelper( root ); 
+   {
+       this.jUnitTestArray = new ArrayList<K>();
+      preorderHelper( root );
+      System.out.println(this.jUnitTestArray);
    } // end method preorderTraversal
 
    // recursive method to perform preorder traversal
@@ -33,15 +37,18 @@ public class Tree<K extends Comparable< K >,V extends Comparable< V > >
       if ( node == null )
          return;
 
-      System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
-      preorderHelper( node.leftNode ); // traverse left subtree
-      preorderHelper( node.rightNode ); // traverse right subtree
+//      System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
+       this.jUnitTestArray.add(node.key);
+       preorderHelper( node.leftNode ); // traverse left subtree
+       preorderHelper( node.rightNode ); // traverse right subtree
    } // end method preorderHelper
 
    // begin inorder traversal
    public void ascendingOrderTraversal()
    {
+       this.jUnitTestArray = new ArrayList<K>();
        ascendingOrderHelper( root );
+       System.out.println(this.jUnitTestArray);
    } // end method inorderTraversal
 
    // recursive method to perform inorder traversal
@@ -51,13 +58,16 @@ public class Tree<K extends Comparable< K >,V extends Comparable< V > >
          return;
 
        ascendingOrderHelper( node.leftNode ); // traverse left subtree
-       System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
+//       System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
+       this.jUnitTestArray.add(node.key);
        ascendingOrderHelper( node.rightNode ); // traverse right subtree
    } // end method inorderHelper
 
     public void descendingOrderTraversal()
     {
+        this.jUnitTestArray = new ArrayList<K>();
         descendingOrderHelper( root );
+        System.out.println(this.jUnitTestArray);
     } // end method inorderTraversal
 
     // recursive method to perform inorder traversal
@@ -67,15 +77,18 @@ public class Tree<K extends Comparable< K >,V extends Comparable< V > >
             return;
 
         descendingOrderHelper( node.rightNode ); // traverse left subtree
-        System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
+//        System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
+        this.jUnitTestArray.add(node.key);
         descendingOrderHelper( node.leftNode ); // traverse right subtree
 
     } // end method inorderHelper
 
    // begin postorder traversal
    public void postorderTraversal()
-   { 
-      postorderHelper( root ); 
+   {
+       this.jUnitTestArray = new ArrayList<K>();
+      postorderHelper( root );
+       System.out.println(this.jUnitTestArray);
    } // end method postorderTraversal
 
    // recursive method to perform postorder traversal
@@ -86,23 +99,27 @@ public class Tree<K extends Comparable< K >,V extends Comparable< V > >
   
       postorderHelper( node.leftNode ); // traverse left subtree
       postorderHelper( node.rightNode ); // traverse right subtree
-      System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
+       this.jUnitTestArray.add(node.key);
+//      System.out.printf( "key: %s  --  value: %s%n", node.key, node.value ); // output node data
    } // end method postorderHelper
 
     public V  findByKey(K key){
-       return findByKeyHelper(root, key,1);
+       return findByKeyHelper(root, key);
     }
 
-    private V findByKeyHelper(TreeNode<K, V> node, K key,int count) {
-       System.out.printf("%d,",count);
+    private V findByKeyHelper(TreeNode<K, V> node, K key) {
        if(node == null)
            return null;
        else if(key.compareTo( node.key) == 0)
            return node.value;
        else if(key.compareTo( node.key) < 0)
-           return findByKeyHelper(node.leftNode, key, count+1);
+           return findByKeyHelper(node.leftNode, key);
        else
-           return findByKeyHelper(node.rightNode, key, count+1);
+           return findByKeyHelper(node.rightNode, key);
+    }
+
+    public ArrayList<K> getjUnitTestArray(){
+       return this.jUnitTestArray;
     }
 } // end class Tree
 
